@@ -15,7 +15,6 @@ router.get("/", async (req: Request, res: Response) => {
 
 router.post("/create", async (req: Request, res: Response) => {
     res.status(201).json(await createActor({
-        id: req.body.id,
         name: req.body.name,
         age: req.body.age,
         film_id: req.body.film_id || null
@@ -32,8 +31,12 @@ router.put("/update/:id", async (req: Request, res: Response) => {
         film_id: req.body.film_id || null
     })
 
-    res.status(update.statusCode).json(update)
-    return
+    if(update.error){
+        res.status(update.statusCode).json(update)
+        return
+    }else{
+        res.status(update.statusCode).json(update)
+    }
 })
 
 
