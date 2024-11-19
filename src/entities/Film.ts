@@ -12,11 +12,7 @@ export class Film {
     @Column()
     releasedate: number;
 
-    @ManyToOne(() => Actor, (Actor) => Actor.films)
-    @JoinColumn({
-        name : "protagonist"
-    })
-    films: Film[]
-    protagonist: any;
+    @Column()
+    protagonist: string
 
 }

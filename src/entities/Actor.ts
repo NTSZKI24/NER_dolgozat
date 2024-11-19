@@ -16,8 +16,5 @@ export class Actor{
     @Column()
     age: number
 
-    @OneToMany(() => Film, (films) => films.protagonist)
-    films: Film[]
-    
 
 }

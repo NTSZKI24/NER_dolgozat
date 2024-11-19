@@ -28,7 +28,7 @@ router.put("/update/:id", async (req: Request, res: Response) => {
         id: parseInt(req.params.id),
         title: req.body.title,
         releasedate: req.body.releasedate,
-        protagonist: req.body.protagonist || null
+        protagonist: req.body.protagonist || null,
     })
 
     if(update.error){

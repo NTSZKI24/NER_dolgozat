@@ -21,17 +21,12 @@ router.post("/create", async (req: Request, res: Response) => {
 router.put("/update/:id", async (req: Request, res: Response) => {
     const update = await updateCat({
         id: parseInt(req.params.id),
-        name: req.body.name,
-        sex: req.body.sex,
+        name: req.params.name,
+        sex: req.params.sex,
         color: req.body.color
     })
-
-    if(update.error){
-        res.status(update.statusCode).json(update)
-        return
-    }else{
-        res.status(update.statusCode).json(update)
-    }
+    res.status(update.statusCode).json(update)
+    return
 })
 
 router.delete("/delete/:id", async (req: Request, res: Response) => {

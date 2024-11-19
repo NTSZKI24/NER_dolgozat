@@ -25,7 +25,7 @@ router.put("/update/:id", async (req: Request, res: Response) => {
         brand: req.body.brand,
         model: req.body.model,
         fuel: req.body.fuel,
-        color: req.body.color
+        color: req.body.color,
     })
 
     if(update.error){

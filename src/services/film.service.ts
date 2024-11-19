@@ -15,9 +15,7 @@ interface IFilmData {
 
 export const getAllFilm = async () => {
     return await filmRepository.find({
-        relations: {
-            protagonist : true
-        }
+        
     })
 }
 
