@@ -15,7 +15,10 @@ router.get("/", async (req: Request, res: Response) => {
 
 router.post("/create", async (req: Request, res: Response) => {
     res.status(201).json(await createCat({
-        
+        id: req.body.id,
+        name: req.body.name,
+        sex: req.body.sex,
+        color: req.body.color
     }))
 })
 
@@ -23,7 +26,10 @@ router.post("/create", async (req: Request, res: Response) => {
 
 router.put("/update/:id", async (req: Request, res: Response) => {
     const update = await updateCat({
-        
+        id: parseInt(req.params.id),
+        name: req.body.name,
+        sex: req.body.sex,
+        color: req.body.color
     })
 
     res.status(update.statusCode).json(update)

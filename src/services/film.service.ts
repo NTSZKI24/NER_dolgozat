@@ -1,7 +1,8 @@
-import { error } from "console"
+
 import { AppDataSource } from "../data-source"
 import { Film } from "../entities/Film"
-import { STATUS_CODES } from "http"
+import { Actor } from "../entities/Actor"
+
 
 const filmRepository = AppDataSource.getRepository(Film)
 
@@ -12,12 +13,14 @@ interface IFilmData {
     protagonist: string
 }
 
-
 export const getAllFilm = async () => {
-    return await filmRepository.find ({
-        
+    return await filmRepository.find({
+        relations: {
+            protagonist : true
+        }
     })
 }
+
 
 export const createFilm = async (filmData: IFilmData) => {
     const film = await filmRepository.create(filmData)
@@ -25,7 +28,7 @@ export const createFilm = async (filmData: IFilmData) => {
 
     return {
         error: false,
-        instend: film
+        inserted: film
     }
 }
 

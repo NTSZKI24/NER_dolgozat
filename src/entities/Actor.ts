@@ -1,17 +1,23 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column,  Entity,  JoinColumn,  ManyToMany,  OneToMany,  PrimaryGeneratedColumn, Timestamp } from "typeorm";
 import { Film } from "./Film";
 
+
 @Entity("actors")
-export class Actor {
+export class Actor{
     @PrimaryGeneratedColumn()
-    id: number;
+    id: number 
 
     @Column()
-    name: string;
+    film_id: number
 
     @Column()
-    age: number;
+    name: string
 
-    @ManyToMany(() => Film, (film) => film.protagonist)
-    films: Film[];
+    @Column()
+    age: number
+
+    @OneToMany(() => Film, (films) => films.protagonist)
+    films: Film[]
+    
+
 }
