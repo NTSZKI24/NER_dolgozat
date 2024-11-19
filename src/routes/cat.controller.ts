@@ -18,16 +18,18 @@ router.post("/create", async (req: Request, res: Response) => {
     }))
 })
 
-router.put("/update/:id", async (req: Request, res: Response) => {
+router.put("/update/:id", async (req:Request, res:Response) =>{
     const update = await updateCat({
-        id: parseInt(req.params.id),
-        name: req.params.name,
-        sex: req.params.sex,
+        id:parseInt(req.params.id),
+        name: req.body.name,
+        sex: req.body.sex,
         color: req.body.color
-    })
-    res.status(update.statusCode).json(update)
-    return
-})
+    });
+    res.status(update.statusCode).json(update);
+    return;
+
+});
+
 
 router.delete("/delete/:id", async (req: Request, res: Response) => {
     const deleted = await deleteCat(parseInt(req.params.id)) 
