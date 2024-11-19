@@ -3,41 +3,40 @@ import { AppDataSource } from "../data-source"
 import { Cat } from "../entities/Cat"
 import { STATUS_CODES } from "http"
 
-const computerRepository = AppDataSource.getRepository(Cat)
+const catRepository = AppDataSource.getRepository(Cat)
 
 interface ICatData {
     id?: number
-    user_id?: number
-    cpu_cores: number
-    memory_gb: number
+    name: string
+    sex: string
+    color: string
 }
 
 
-export const getAllComputers = async () => {
-    return await computerRepository.find ({
+export const getAllCat = async () => {
+    return await catRepository.find ({
         relations: {
-            user: true,
-            parts: true
+            
         }
     })
 }
 
-export const createComputer = async (computerData: IComputerData) => {
-    const computer = await computerRepository.create(computerData)
-    await computerRepository.save(computer)
+export const createCat = async (catData: ICatData) => {
+    const cat = await catRepository.create(catData)
+    await catRepository.save(cat)
 
     return {
         error: false,
-        instend: computer
+        instend: cat
     }
 }
 
-export const updateComputer = async (computerData: IComputerData) => {
-    const computer = await computerRepository.findOneBy({
-        id: computerData.id
+export const updateCat = async (catData: ICatData) => {
+    const cat = await catRepository.findOneBy({
+        id: catData.id
     })
 
-    if(!computer) {
+    if(!cat) {
         return {
             error: true,
             statusCode: 404,
@@ -45,25 +44,24 @@ export const updateComputer = async (computerData: IComputerData) => {
         }
     }
 
-    computer.cpu_cores = computerData.cpu_cores;
-    computer.memory_gb = computerData.memory_gb;
-    await computerRepository.save(computer)
+    
+    await catRepository.save(cat)
 
     return {
         error: false,
         statusCode: 200,
         message: "Updated",
-        computer: computer
+        cat: cat
     }
 
 }
 
-export const deleteComputer = async (id: number) => {
-    const computer = await computerRepository.findOneBy({
+export const deleteCat = async (id: number) => {
+    const cat = await catRepository.findOneBy({
         id: id
     })
 
-    if (!computer) {
+    if (!cat) {
         return {
             error: true,
             statusCode: 404,
@@ -72,7 +70,7 @@ export const deleteComputer = async (id: number) => {
     }
 
 
-    await computerRepository.remove(computer)
+    await catRepository.remove(cat)
     return {
         error: false,
         statusCode: 204

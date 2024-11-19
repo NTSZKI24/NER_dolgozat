@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Actor } from "./Actor";
 
 @Entity("films")
@@ -12,10 +12,7 @@ export class Film {
     @Column()
     releasedate: number;
 
-    @ManyToMany(() => Actor, (actor) => actor.films)
-    @JoinColumn({
-        name : "protagonist"
-    })
+    @ManyToOne(() => Actor, (actor) => actor.films)
+    protagonist: Actor
 
-    actors: Actor[];
 }

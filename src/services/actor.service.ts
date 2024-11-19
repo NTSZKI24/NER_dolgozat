@@ -1,43 +1,40 @@
 import { error } from "console"
 import { AppDataSource } from "../data-source"
-import { Computer } from "../entities/Computer"
+import { Actor } from "../entities/Actor"
 import { STATUS_CODES } from "http"
 
-const computerRepository = AppDataSource.getRepository(Computer)
+const actorRepository = AppDataSource.getRepository(Actor)
 
-interface IComputerData {
+interface IActorData {
     id?: number
-    user_id?: number
-    cpu_cores: number
-    memory_gb: number
+    film_id?: number
+    name: string
+    age: number
 }
 
 
-export const getAllComputers = async () => {
-    return await computerRepository.find ({
-        relations: {
-            user: true,
-            parts: true
-        }
+export const getAllActor = async () => {
+    return await actorRepository.find ({
+        
     })
 }
 
-export const createComputer = async (computerData: IComputerData) => {
-    const computer = await computerRepository.create(computerData)
-    await computerRepository.save(computer)
+export const createActor = async (actorData: IActorData) => {
+    const actor = await actorRepository.create(actorData)
+    await actorRepository.save(actor)
 
     return {
         error: false,
-        instend: computer
+        instend: actor
     }
 }
 
-export const updateComputer = async (computerData: IComputerData) => {
-    const computer = await computerRepository.findOneBy({
-        id: computerData.id
+export const updateActor = async (actorData: IActorData) => {
+    const actor = await actorRepository.findOneBy({
+        id: actorData.id
     })
 
-    if(!computer) {
+    if(!actor) {
         return {
             error: true,
             statusCode: 404,
@@ -45,25 +42,24 @@ export const updateComputer = async (computerData: IComputerData) => {
         }
     }
 
-    computer.cpu_cores = computerData.cpu_cores;
-    computer.memory_gb = computerData.memory_gb;
-    await computerRepository.save(computer)
+    
+    await actorRepository.save(actor)
 
     return {
         error: false,
         statusCode: 200,
         message: "Updated",
-        computer: computer
+        actor: actor
     }
 
 }
 
-export const deleteComputer = async (id: number) => {
-    const computer = await computerRepository.findOneBy({
+export const deleteActor = async (id: number) => {
+    const actor = await actorRepository.findOneBy({
         id: id
     })
 
-    if (!computer) {
+    if (!actor) {
         return {
             error: true,
             statusCode: 404,
@@ -72,7 +68,7 @@ export const deleteComputer = async (id: number) => {
     }
 
 
-    await computerRepository.remove(computer)
+    await actorRepository.remove(actor)
     return {
         error: false,
         statusCode: 204

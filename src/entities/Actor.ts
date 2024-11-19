@@ -12,6 +12,6 @@ export class Actor {
     @Column()
     age: number;
 
-    @ManyToMany(() => Film, (film) => film.actors)
+    @ManyToMany(() => Film, (film) => film.protagonist)
     films: Film[];
 }

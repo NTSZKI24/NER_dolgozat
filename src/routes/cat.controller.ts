@@ -1,12 +1,12 @@
 import express, {Request, Response} from "express"
-import { getAllCats, createCat, updateCat, deleteCat } from "../services/cat.service";
+import { getAllCat, createCat, updateCat, deleteCat } from "../services/cat.service";
 
 
 const router = express.Router()
 
 
 router.get("/", async (req: Request, res: Response) => {
-    const cats = await getAllCats()
+    const cats = await getAllCat()
 
     res.json(cats)
     return

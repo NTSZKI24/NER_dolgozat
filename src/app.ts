@@ -10,11 +10,12 @@ const app = express()
 app.use(express.json())
 /* app.use(logger()) */
 
-/*
-app.use("/Part", )
-app.use("/Computer", );
-app.use("/User") 
-*/
+
+app.use("/Cat", );
+app.use("/Car", );
+app.use("/Actor", );
+app.use("/Film", );
+
 
 
 app.listen(process.env.PORT, () => {
